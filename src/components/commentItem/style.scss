@@ -1,0 +1,17 @@
+.commentitem {
+    display: flex;
+    flex-direction: column;
+
+    p {
+        margin: 5px 0;
+    }
+
+    p:nth-child(1) {
+        font-style: italic;
+        color: rgb(168, 168, 168);
+    }
+
+    p:nth-child(2) {
+        font-size: 1.3rem;
+    }
+}

@@ -1,0 +1,54 @@
+.menuheader {
+    align-items: flex-start;
+    justify-content: space-between;
+    width: 100%;
+    .nav-item {
+        margin: 0.4em;
+        a {
+            margin: 0 0.5rem;
+        }
+
+        button {
+            margin: 0 0.5rem;
+        }
+
+        .search {
+            width: 100%;
+        }
+    }
+}
+
+@media (min-width: 992px) {
+    .menuheader {
+        align-items: center;
+
+        .nav-item {
+            margin: 0 1em;
+            a {
+                margin: 1em;
+            }
+
+            a:hover {
+                border-bottom: 2px solid #6c47ff;
+                border-top: 2px solid #6c47ff;
+                transition: 0.5s;
+            }
+
+            .search {
+                min-width: 150%;
+                width: auto;
+            }
+        }
+
+        .row {
+            flex-wrap: nowrap;
+            a {
+                margin: 0.5em;
+            }
+
+            button {
+                margin: 0.5em;
+            }
+        }
+    }
+}

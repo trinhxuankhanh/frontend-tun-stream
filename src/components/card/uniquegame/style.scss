@@ -1,0 +1,21 @@
+.cardgames {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    align-items: center;
+    max-width: 200px;
+    height: auto;
+    border-radius: 4px;
+    padding-top: 10px;
+
+    &__img {
+        width: 90%;
+        height: 100%;
+        border-radius: 4px;
+    }
+}
+
+.cardgames:hover {
+    background-color: #6c47ff;
+    transition: 0.3s;
+}

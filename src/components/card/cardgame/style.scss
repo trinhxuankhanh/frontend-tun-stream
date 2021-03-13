@@ -1,0 +1,52 @@
+.colcustom {
+    width: 333px;
+    margin: auto;
+    height: auto;
+    .cardgame {
+        padding: 10px;
+        display: inline-block;
+        transform: skew(-8.745deg) translateX(22px);
+        padding: 10px;
+        background-color: transparent;
+        border-radius: 8px;
+
+        span {
+            display: block;
+
+            .cardgame__img {
+                height: 100%;
+                width: 100%;
+                will-change: auto;
+                display: inline-block;
+                border-radius: 4px;
+            }
+        }
+    }
+
+    .cardgame__title {
+        color: #fff;
+        text-decoration: none;
+        font-size: 16px;
+        margin: 10px 0;
+
+        h3 {
+            margin: 0;
+        }
+    }
+
+    .cardgame__sub {
+        color: hsla(0, 0%, 100%, 0.6);
+        font-size: 12px;
+        margin: 10px 0;
+    }
+
+    .cardgame:hover .cardgame__img {
+        transform: translateX(18px) translateY(-17px);
+        transition: 0.3s;
+    }
+
+    .cardgame:hover {
+        background-color: #6c47ff;
+        transition: 0.3s;
+    }
+}

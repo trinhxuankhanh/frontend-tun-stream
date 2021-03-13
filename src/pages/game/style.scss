@@ -1,0 +1,33 @@
+.game {
+    background-color: rgba(0, 0, 0, 0.8);
+    .row {
+        .col-12 {
+            button {
+                margin: 0 1rem;
+            }
+
+            .text {
+                font-size: 20px;
+                font-weight: bold;
+            }
+        }
+    }
+}
+
+@media (min-width: 992px) {
+    .game {
+        background-color: rgba(0, 0, 0, 0.8);
+        .row {
+            .col-12 {
+                button {
+                    margin: 0 1rem;
+                }
+
+                .text {
+                    font-size: 20px;
+                    font-weight: bold;
+                }
+            }
+        }
+    }
+}

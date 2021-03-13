@@ -1,0 +1,24 @@
+.search {
+    display: flex;
+    border: 1px solid #fff;
+    border-radius: 30px;
+    padding: 7px;
+    align-items: center;
+
+    &__img {
+        width: 20px;
+        height: 20px;
+        filter: invert(100%) sepia(7%) saturate(7470%) hue-rotate(277deg) brightness(114%) contrast(106%);
+        cursor: pointer;
+    }
+
+    &__item {
+        background-color: transparent;
+        border: none;
+        outline: none;
+        margin: 0 5px;
+        color: #fff;
+        width: 100%;
+        font-size: 16px;
+    }
+}
