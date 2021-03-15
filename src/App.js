@@ -16,9 +16,10 @@ export default function App() {
         <Route path="/user/:id" exact>
           <User />
         </Route>
-        <Route path="/stream">
-          <Stream stream_key="yuhsEhLFD" />
-        </Route>
+        <Route
+          path="/stream/:id"
+          render={(props) => <Stream {...props} />}
+        ></Route>
         <Route path="/login">
           <Login />
         </Route>

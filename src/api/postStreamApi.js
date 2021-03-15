@@ -1,10 +1,10 @@
 import axiosClient from "./axiosClient";
 
 const postStream = {
-  postStream: (formValue) => {
+  postStream: (formValue, id) => {
     if (formValue === {}) return;
 
-    const url = "/playstream";
+    const url = `/playstream/${id}`;
     return axiosClient.post(url, formValue);
   },
 };

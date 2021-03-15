@@ -8,15 +8,16 @@ import {
 } from "reactstrap";
 import getGameApi from "../../api/getGameApi";
 import getUserApi from "../../api/getUserApi";
+import postNewStreamApi from "../../api/postNewStreamApi";
+import postStream from "../../api/postStreamApi";
+import play from "../../asset/img/play.svg";
+import stop from "../../asset/img/stop.svg";
 import Btnclick from "../../components/btnclick";
 import Footer from "../../components/footer";
 import Header from "../../components/header";
-import play from "../../asset/img/play.svg";
-import stop from "../../asset/img/stop.svg";
 import "./style.scss";
-import postStream from "../../api/postStreamApi";
 
-const User = (props) => {
+const User = () => {
   const { id } = useParams();
   const [user, setUser] = useState(null);
   const [games, setGames] = useState([]);
@@ -31,22 +32,45 @@ const User = (props) => {
   const togglePC = () => setOpenPC(!dropdownOpenPC);
   const toggleMoblie = () => setOpenMoblie(!dropdownOpenMoblie);
 
+  if (auth === null) window.location.href = "/login";
+
   const handleStopStream = () => {
-    if (isStream) setIsStream(!isStream);
+    setIsStream(!isStream);
+    postStream.postStream(
+      { id_game: 0, title: "", status: false },
+      auth.stream_key
+    );
   };
 
   const handleSubmitStream = () => {
+    if (gamePC === "Game PC" && gameMoblie === "Game Moblie")
+      return alert("Vui lòng chọn game");
     if (gamePC === "Game PC" && gameMoblie !== "Game Moblie") {
+      setIsStream(!isStream);
       let id_game = games.find((game) => game.name === gameMoblie)._id;
-      postStream.postStream({ id_game, id, titleStream, isStream: true });
+      postStream.postStream(
+        {
+          id_game,
+          title: titleStream,
+          status: true,
+        },
+        auth.stream_key
+      );
       setGameMoblie("Game Moblie");
     } else {
+      setIsStream(!isStream);
       let id_game = games.find((game) => game.name === gamePC)._id;
-      postStream.postStream({ id_game, id, titleStream, isStream: true });
+      postStream.postStream(
+        {
+          id_game,
+          title: titleStream,
+          status: true,
+        },
+        auth.stream_key
+      );
       setGamePC("Game PC");
     }
 
-    setIsStream(!isStream);
     setTitleStream("");
   };
 
@@ -65,19 +89,25 @@ const User = (props) => {
   };
 
   useEffect(() => {
-    if (auth !== null) {
-      getUserApi
-        .getUserById(id)
-        .then((response) => {
-          setUser(response);
-        })
-        .catch((err) => console.log(err));
-    } else window.location.href = "/login";
-  }, [id, auth]);
+    getUserApi
+      .getUserById(id)
+      .then((response) => {
+        setUser(response);
+      })
+      .catch((err) => console.log(err));
+  }, [id]);
+
   useEffect(() => {
     getGameApi
       .getGame({ type: "" })
       .then((response) => setGames(response))
+      .catch((err) => console.log(err));
+  }, []);
+
+  useEffect(() => {
+    postNewStreamApi
+      .post({ auth }, auth.stream_key)
+      .then((response) => setIsStream(response.status))
       .catch((err) => console.log(err));
   }, []);
 

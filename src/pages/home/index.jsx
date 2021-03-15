@@ -42,7 +42,7 @@ const Home = () => {
               </div>
             </div>
 
-            <div className="col-12 col-md-6 col-lg-4 col-xl-3">
+            {/* <div className="col-12 col-md-6 col-lg-4 col-xl-3">
               <CardStream />
             </div>
 
@@ -56,7 +56,7 @@ const Home = () => {
 
             <div className="col-12 col-md-6 col-lg-4 col-xl-3">
               <CardStream />
-            </div>
+            </div> */}
           </div>
           <div className="col-12 row">
             <div className="col-12">
@@ -73,7 +73,7 @@ const Home = () => {
               </div>
             </div>
 
-            <div className="col-12 col-md-6 col-lg-4 col-xl-3">
+            {/* <div className="col-12 col-md-6 col-lg-4 col-xl-3">
               <CardStream />
             </div>
 
@@ -87,7 +87,7 @@ const Home = () => {
 
             <div className="col-12 col-md-6 col-lg-4 col-xl-3">
               <CardStream />
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

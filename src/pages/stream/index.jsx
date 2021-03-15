@@ -17,7 +17,7 @@ export default class Stream extends React.Component {
   }
 
   componentDidMount() {
-    getUserApi.getUserByStream(this.props.stream_key).then((res) => {
+    getUserApi.getUserByStream(this.props.match.params.id).then((res) => {
       this.setState(
         {
           stream: true,
@@ -27,7 +27,7 @@ export default class Stream extends React.Component {
             sources: [
               {
                 src:
-                  "http://127.0.0.1:" +
+                  "http://192.168.1.9:" +
                   config.rtmp_server.http.port +
                   "/live/" +
                   res.stream_key +
@@ -68,7 +68,7 @@ export default class Stream extends React.Component {
             )}
           </div>
           <div className="col-4 p-0">
-            <Comment stream_key={this.props.stream_key} />
+            <Comment stream_key={this.props.match.params.id} />
           </div>
         </div>
         <Footer />

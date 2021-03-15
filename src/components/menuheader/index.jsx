@@ -18,6 +18,7 @@ const MenuHeader = () => {
   const logoutHandle = () => {
     setIsAuth(null);
     localStorage.removeItem("user");
+    window.location.href = "/";
   };
 
   return (
