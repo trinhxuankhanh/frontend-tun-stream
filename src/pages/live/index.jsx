@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { NavItem } from "reactstrap";
 import getLiveApi from "../../api/getLiveApi";
 import CardStream from "../../components/card/cardstream";
 import Footer from "../../components/footer";
@@ -38,10 +39,12 @@ const Live = () => {
     if (lives.length > 0 && userLives.length > 0) {
       const newArr = userLives
         .filter((item) => item.status === true)
-        .map((item) => item.stream_key);
+        .map((item) => {
+          if (lives.includes(item.stream_key)) return item;
+        })
+        .filter((item) => item !== undefined);
 
-      if (JSON.stringify(newArr) === JSON.stringify(lives))
-        setCardLives(userLives);
+      setCardLives(newArr);
     }
   }, [lives, userLives]);
 

@@ -5,7 +5,7 @@ import "./style.scss";
 const CommentItem = (props) => {
   const { content, username, time } = props;
   return (
-    <li className="commentitem">
+    <li className="commentitem col-12">
       <p>
         {username} <span>{monent(time).fromNow()}</span>
       </p>

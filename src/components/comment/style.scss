@@ -2,17 +2,23 @@
     background: #333333;
     height: 100%;
     position: relative;
+    scroll-behavior: smooth;
 
     &__body {
         text-decoration: none;
         overflow-y: scroll;
         overflow-x: hidden;
-        max-height: 660px;
+        height: 800px;
         padding-bottom: 30px;
 
-        li {
-            margin: 0 20px;
-            padding: 10px;
+        .styles_scrollable-div__1DOyU {
+            overflow: hidden;
+            width: 100%;
+
+            li {
+                margin: 0 20px;
+                padding: 10px;
+            }
         }
     }
 
@@ -45,11 +51,63 @@
             padding: 10px;
             color: black;
             margin: 5px 10px;
-            width: 80%;
+            width: 70%;
         }
 
         button {
             margin: 5px;
+        }
+    }
+}
+
+@media only screen and (max-width: 1579px) {
+    .comment {
+        .comment__body {
+            height: 650px;
+        }
+        .comment__send {
+            .comment__text {
+                width: 55%;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 1500px) {
+    .comment {
+        .comment__send {
+            .comment__text {
+                width: 50%;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 1350px) {
+    .comment {
+        .comment__body {
+            height: 500px;
+        }
+    }
+}
+
+@media only screen and (max-width: 1200px) {
+    .comment {
+        .comment__body {
+            height: 350px;
+        }
+        .comment__send {
+            .comment__text {
+                width: 70%;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 1200px) {
+    .comment {
+        .comment__body {
+            height: 500px;
         }
     }
 }

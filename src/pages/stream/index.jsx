@@ -55,7 +55,8 @@ export default class Stream extends React.Component {
       <Fragment>
         <Header />
         <div className="row w-100 m-auto">
-          <div className="col-8 p-0">
+          {/* col-12 col-md-6 col-lg-4 col-xl-3 */}
+          <div className="col-12 col-md-12 col-lg-8 col-xl-10 p-0">
             {this.state.stream ? (
               <div data-vjs-player>
                 <video
@@ -67,7 +68,7 @@ export default class Stream extends React.Component {
               " Loading ... "
             )}
           </div>
-          <div className="col-4 p-0">
+          <div className="col-12 col-md-12 col-lg-4 col-xl-2 p-0">
             <Comment stream_key={this.props.match.params.id} />
           </div>
         </div>

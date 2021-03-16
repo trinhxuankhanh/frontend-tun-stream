@@ -5,13 +5,14 @@ import { DataContext } from "../../GlobalState";
 import Btnclick from "../btnclick";
 import CommentItem from "../commentItem";
 import "./style.scss";
+import ScrollableFeed from "react-scrollable-feed";
 
 const Comment = (props) => {
   const state = useContext(DataContext);
   const [isAuth, setIsAuth] = state.auth;
   const [comments, setComments] = useState([]);
 
-  const contentRef = useRef();
+  const contentRef = useRef(null);
 
   const commentSubmit = () => {
     const createdAt = new Date().toDateString();
@@ -32,33 +33,29 @@ const Comment = (props) => {
         setComments(response);
       })
       .catch((err) => console.log(err));
-  });
+  }, []);
 
   return (
     <div className="comment">
-      <ul className="comment__body">
-        {comments.map((comment) => {
-          return (
-            <CommentItem
-              key={comment._id}
-              username={comment.isAuth.username}
-              content={comment.content}
-              time={comment.createdAt}
-            />
-          );
-        })}
+      <ul className="comment__body row w-100">
+        <ScrollableFeed>
+          {comments.map((comment) => {
+            return (
+              <CommentItem
+                key={comment._id}
+                username={comment.isAuth.username}
+                content={comment.content}
+                time={comment.createdAt}
+              />
+            );
+          })}
+        </ScrollableFeed>
       </ul>
       <div className="comment__send">
         <div
           className="comment__text"
           type="text"
           contentEditable="true"
-          tyle={{
-            height: "100px",
-            border: "1px solid #ccc",
-            padding: "5px 10px",
-            outline: "none",
-          }}
           ref={contentRef}
         />
         <Btnclick
