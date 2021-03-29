@@ -12,9 +12,11 @@ import postNewStreamApi from "../../api/postNewStreamApi";
 import postStream from "../../api/postStreamApi";
 import play from "../../asset/img/play.svg";
 import stop from "../../asset/img/stop.svg";
+import Btn from "../../components/btn";
 import Btnclick from "../../components/btnclick";
 import Footer from "../../components/footer";
 import Header from "../../components/header";
+import edit from "../../asset/img/pencil.svg";
 import "./style.scss";
 
 const User = () => {
@@ -118,7 +120,7 @@ const User = () => {
         <div className="user row m-0">
           <ul className="col-12">
             <li>
-              <img src={user.avt} alt="avt"></img>
+              <img src={user.avt} alt="img" />
             </li>
             <li>
               Tên người dùng: <span>{user.username}</span>
@@ -206,7 +208,14 @@ const User = () => {
                     content="Bắt đầu stream ngay thôi"
                     icon={play}
                     click={handleSubmitStream}
-                  ></Btnclick>
+                  />
+                </li>
+                <li className="d-flex">
+                  <Btn
+                    component={`/updateuser/${id}`}
+                    icon={edit}
+                    content={"Sửa thông tin cá nhân"}
+                  />
                 </li>
               </React.Fragment>
             )}

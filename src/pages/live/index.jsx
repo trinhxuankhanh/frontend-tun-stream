@@ -1,6 +1,5 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { NavItem } from "reactstrap";
 import getLiveApi from "../../api/getLiveApi";
 import CardStream from "../../components/card/cardstream";
 import Footer from "../../components/footer";
@@ -14,7 +13,7 @@ const Live = () => {
 
   useEffect(() => {
     axios({
-      url: "http://192.168.1.9:8888/api/streams",
+      url: "http://localhost:8888/api/streams",
     })
       .then((response) => {
         if (response && response.data) {

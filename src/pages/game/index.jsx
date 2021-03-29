@@ -37,10 +37,15 @@ const Game = () => {
             <Btnclick content="PC Game" click={setType} value="pc"></Btnclick>
           </div>
           {games.length > 0 &&
-            games.map((game, index) => {
+            games.map((game) => {
               return (
                 <div className="col-6 col-md-4 col-lg-3 col-xl-2">
-                  <UniqueGame key={index} name={game.name} img={game.img} />
+                  <UniqueGame
+                    key={game._id}
+                    name={game.name}
+                    id={game._id}
+                    img={game.img}
+                  />
                 </div>
               );
             })}

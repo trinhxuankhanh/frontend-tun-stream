@@ -27,7 +27,7 @@ export default class Stream extends React.Component {
             sources: [
               {
                 src:
-                  "http://192.168.1.9:" +
+                  "http://localhost:" +
                   config.rtmp_server.http.port +
                   "/live/" +
                   res.stream_key +

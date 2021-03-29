@@ -58,8 +58,13 @@ const CarouselGame = () => {
       responsive={responsive}
       removeArrowOnDeviceType={["tablet", "mobile"]}
     >
-      {games.map((cardgame, index) => (
-        <CardGame key={index} img={cardgame.img} name={cardgame.name} />
+      {games.map((cardgame) => (
+        <CardGame
+          key={cardgame._id}
+          id={cardgame._id}
+          img={cardgame.img}
+          name={cardgame.name}
+        />
       ))}
     </Carousel>
   );

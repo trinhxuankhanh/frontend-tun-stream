@@ -33,7 +33,7 @@ const Comment = (props) => {
         setComments(response);
       })
       .catch((err) => console.log(err));
-  }, []);
+  });
 
   return (
     <div className="comment">
