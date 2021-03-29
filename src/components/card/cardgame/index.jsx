@@ -4,6 +4,7 @@ import "./style.scss";
 
 const CardGame = (props) => {
   const { name, img, id } = props;
+
   return (
     <div className="colcustom">
       <Link to={`/game/${id}`} className="cardgame">

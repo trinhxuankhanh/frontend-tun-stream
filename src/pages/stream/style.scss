@@ -1,3 +1,24 @@
 .row {
-    background-color: black;
+    .col-12 {
+        .sub-video {
+            background-color: #333;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            .share {
+                padding: 20px 40px;
+            }
+            .flex-column {
+                display: flex;
+
+                .d-flex {
+                    padding: 20px 40px;
+                    p {
+                        margin: 0 10px;
+                    }
+                }
+            }
+        }
+    }
 }

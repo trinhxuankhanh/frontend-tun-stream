@@ -1,10 +1,12 @@
 import React, { Fragment } from "react";
-import Footer from "../../components/footer";
-import Header from "../../components/header";
 import videojs from "video.js";
 import getUserApi from "../../api/getUserApi";
-import config from "../../default";
 import Comment from "../../components/comment";
+import Footer from "../../components/footer";
+import Header from "../../components/header";
+import SubStream from "../../components/substream";
+import config from "../../default";
+import "./style.scss";
 
 export default class Stream extends React.Component {
   constructor(props) {
@@ -55,7 +57,9 @@ export default class Stream extends React.Component {
       <Fragment>
         <Header />
         <div className="row w-100 m-auto">
-          {/* col-12 col-md-6 col-lg-4 col-xl-3 */}
+          <div className="col-12 p-0">
+            <SubStream id={this.props.match.params.id} />
+          </div>
           <div className="col-12 col-md-12 col-lg-8 col-xl-10 p-0">
             {this.state.stream ? (
               <div data-vjs-player>

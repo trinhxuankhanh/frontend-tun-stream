@@ -4,7 +4,7 @@ import Avatar from "react-avatar-edit";
 class UploadAvt extends Component {
   constructor(props) {
     super(props);
-    const { src } = "";
+    const { src } = this.props;
     this.state = {
       preview: null,
       src,
@@ -16,10 +16,14 @@ class UploadAvt extends Component {
 
   onClose() {
     this.setState({ preview: null });
+
+    this.props.seturl({ preview: null });
   }
 
   onCrop(preview) {
     this.setState({ preview });
+
+    this.props.seturl({ preview });
   }
 
   onBeforeFileLoad(elem) {
@@ -31,7 +35,7 @@ class UploadAvt extends Component {
 
   render() {
     return (
-      <div>
+      <div className="uploadavt">
         <Avatar
           width={390}
           height={295}

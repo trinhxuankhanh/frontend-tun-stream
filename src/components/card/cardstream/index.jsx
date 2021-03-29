@@ -1,19 +1,20 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import postUpViewerApi from "../../../api/postUpViewerApi";
 import viewers from "../../../asset/img/viewers.svg";
 import Btn from "../../btn";
 import "./style.scss";
 
 const CardStream = (props) => {
-  const { title, viewer, user, stream_key } = props;
+  const { title, viewer, user, stream_key, thumbnail } = props;
   const { avt, username } = user;
+  const handleUpViewer = () => {
+    postUpViewerApi.post(stream_key);
+  };
   return (
-    <div className="cardstream m-auto">
+    <div className="cardstream m-auto" onClick={handleUpViewer}>
       <Link to={`/stream/${stream_key}`} className="cardstream__top">
-        <img
-          src="https://img.nimo.tv/o/banner/CCF68FF08ABE024B7B3DBA7022A4AC50_1cb4aaf04a9f525140ba1ba4958df9c6.jpg/w800_l0/img.jpg"
-          alt="intro"
-        ></img>
+        <img src={thumbnail} alt="intro"></img>
         <Btn content="PC Game" />
       </Link>
       <div className="cardstream__bottom">

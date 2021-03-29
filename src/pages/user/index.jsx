@@ -18,6 +18,7 @@ import Footer from "../../components/footer";
 import Header from "../../components/header";
 import edit from "../../asset/img/pencil.svg";
 import "./style.scss";
+import Thumbnail from "../../components/thumbnail";
 
 const User = () => {
   const { id } = useParams();
@@ -30,6 +31,7 @@ const User = () => {
   const [gameMoblie, setGameMoblie] = useState("Game Moblie");
   const [titleStream, setTitleStream] = useState("");
   const [isStream, setIsStream] = useState(false);
+  const [thumbnail, setThumbnail] = useState("");
 
   const togglePC = () => setOpenPC(!dropdownOpenPC);
   const toggleMoblie = () => setOpenMoblie(!dropdownOpenMoblie);
@@ -47,6 +49,7 @@ const User = () => {
   const handleSubmitStream = () => {
     if (gamePC === "Game PC" && gameMoblie === "Game Moblie")
       return alert("Vui lòng chọn game");
+    if (thumbnail === "") return alert("Vui lòng chọn thumbnail");
     if (gamePC === "Game PC" && gameMoblie !== "Game Moblie") {
       setIsStream(!isStream);
       let id_game = games.find((game) => game.name === gameMoblie)._id;
@@ -55,6 +58,7 @@ const User = () => {
           id_game,
           title: titleStream,
           status: true,
+          thumbnail: thumbnail.base64,
         },
         auth.stream_key
       );
@@ -67,6 +71,7 @@ const User = () => {
           id_game,
           title: titleStream,
           status: true,
+          thumbnail: thumbnail.base64,
         },
         auth.stream_key
       );
@@ -155,6 +160,10 @@ const User = () => {
                     placeholder="Chiến LOL thôi anh em ...."
                     onChange={handleOnChangeTitle}
                   />
+                </li>
+                <li>
+                  Chọn một hình làm thumbnail cho buổi stream của bạn
+                  <Thumbnail seturl={setThumbnail} />
                 </li>
                 <li>Vui lòng chọn game bạn muốn stream</li>
                 <li className="games">

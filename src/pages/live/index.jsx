@@ -64,6 +64,7 @@ const Live = () => {
                     viewer={item.viewer}
                     user={item.id_user}
                     stream_key={item.stream_key}
+                    thumbnail={item.thumbnail}
                   />
                 </div>
               );
