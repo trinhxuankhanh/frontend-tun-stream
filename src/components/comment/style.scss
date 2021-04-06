@@ -57,6 +57,17 @@
         button {
             margin: 5px;
         }
+
+        label {
+            img {
+                width: 30px;
+                height: 30px;
+            }
+        }
+
+        .hidden {
+            display: none;
+        }
     }
 }
 

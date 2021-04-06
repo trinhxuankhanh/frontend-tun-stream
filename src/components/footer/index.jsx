@@ -11,24 +11,24 @@ const Footer = () => {
     <footer className="footer">
       <ul className="socialnetwork">
         <li>
-          <Link to="#fb">
+          <a href="https://www.facebook.com/xuan.khanh.5203/">
             <img src={facebook} alt="icon"></img>
-          </Link>
+          </a>
         </li>
         <li>
-          <Link to="#yt">
+          <a href="https://www.youtube.com/channel/UC3-G1mLiuC_mYKRypkQafTQ">
             <img src={youtube} alt="icon"></img>
-          </Link>
+          </a>
         </li>
         <li>
-          <Link to="#in">
+          <a href="https://www.instagram.com/xuaankhanhs/">
             <img src={instagram} alt="icon"></img>
-          </Link>
+          </a>
         </li>
         <li>
-          <Link to="#tw">
+          <a href="https://twitter.com/lolesports">
             <img src={twitter} alt="icon"></img>
-          </Link>
+          </a>
         </li>
       </ul>
       <ul className="aboutus">
@@ -49,7 +49,7 @@ const Footer = () => {
         </li>
       </ul>
       <p className="aboutme">
-        Copyright © 2021-2022 By{" "}
+        Registered &reg; 2021-2022 By{" "}
         <a
           target="_blank"
           rel="noreferrer"

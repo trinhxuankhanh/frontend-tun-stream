@@ -70,6 +70,7 @@ const GameDetail = () => {
                     viewer={live.viewer}
                     user={live.id_user}
                     stream_key={live.stream_key}
+                    thumbnail={live.thumbnail}
                   />
                 </div>
               );

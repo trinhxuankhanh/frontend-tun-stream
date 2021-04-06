@@ -48,7 +48,7 @@ const Search = () => {
         autocomplete="off"
         maxLength="40"
         id="search"
-        type="text"
+        type="search"
         placeholder="Name game ..."
         ref={searchRef}
         onKeyUp={handleKeyup}
