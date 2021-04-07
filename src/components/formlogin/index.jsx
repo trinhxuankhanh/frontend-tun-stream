@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { Alert } from "reactstrap";
 import facebook from "../../asset/img/facebook.svg";
 import google from "../../asset/img/google.svg";
 import Logo from "../logo";
@@ -12,9 +11,8 @@ const FormLogin = (props) => {
   const [repass, setRepass] = useState("");
   const [nickName, setNickName] = useState("");
   const [phone, setPhone] = useState("");
-  const [alert, setAlert] = useState(false);
 
-  const { handle, type, status, mess } = props;
+  const { handle, type } = props;
 
   const handleNickName = (e) => {
     setNickName(e.target.value);
@@ -42,7 +40,6 @@ const FormLogin = (props) => {
       handle({ username: nickName, email: username, password, repass, phone });
     }
 
-    setAlert(true);
     setNickName("");
     setRepass("");
     setUsername("");
@@ -51,15 +48,6 @@ const FormLogin = (props) => {
   };
   return (
     <div className="formlogin">
-      {alert && mess !== "" && (
-        <div className="alert">
-          {status ? (
-            <Alert color="success">{mess}</Alert>
-          ) : (
-            <Alert color="danger">{mess}</Alert>
-          )}
-        </div>
-      )}
       <div className="header p-0">
         <Logo component="#" />
         <Link className="hover" to="/login">

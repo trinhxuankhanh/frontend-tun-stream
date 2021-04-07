@@ -10,14 +10,13 @@ const Login = () => {
     loginApi
       .getUser(data)
       .then((response) => {
+        console.log(response);
         setMess(response.mess);
         setStatus(response.isAuth);
         localStorage.setItem("user", JSON.stringify(response.user));
       })
       .catch((err) => console.log(err));
   };
-
-  if (status) window.location.href = "/";
 
   return (
     <FormLogin type="login" handle={loginHandle} status={status} mess={mess} />
