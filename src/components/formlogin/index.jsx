@@ -1,16 +1,19 @@
 import React, { useState } from "react";
+import FacebookLogin from "react-facebook-login";
+import { Textbox } from "react-inputs-validation";
 import { Link } from "react-router-dom";
-import facebook from "../../asset/img/facebook.svg";
-import google from "../../asset/img/google.svg";
+import loginFacebookApi from "../../api/loginFacebookApi";
+import loginWithFacebookApi from "../../api/loginWithFacebookApi";
 import Logo from "../logo";
 import "./style.scss";
+import { ToastContainer, toast } from "react-toastify";
 
 const FormLogin = (props) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [repass, setRepass] = useState("");
   const [nickName, setNickName] = useState("");
   const [phone, setPhone] = useState("");
+  const [mess, setMess] = useState("");
 
   const { handle, type } = props;
 
@@ -26,28 +29,53 @@ const FormLogin = (props) => {
     setPassword(e.target.value);
   };
 
-  const handleRePass = (e) => {
-    setRepass(e.target.value);
-  };
-
-  const handlePhone = (e) => {
-    setPhone(e.target.value);
+  const responseFacebook = (response) => {
+    loginWithFacebookApi
+      .addUser(response)
+      .then((res) => {
+        setMess(response);
+        loginFacebookApi.addUser(response.email).then((response) => {
+          toast.dark(`🎉🎉🎉 ${response.mess}`, {
+            position: "top-right",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            onClose: () => (window.location.href = "/"),
+          });
+        });
+      })
+      .catch((err) => console.log(err));
   };
 
   const handleSubmitForm = (e) => {
     e.preventDefault();
     if (username !== "" && password !== "") {
-      handle({ username: nickName, email: username, password, repass, phone });
+      handle({ username: nickName, email: username, password, phone });
     }
 
     setNickName("");
-    setRepass("");
     setUsername("");
     setPassword("");
     setPhone("");
   };
   return (
     <div className="formlogin">
+      {mess !== "" && (
+        <ToastContainer
+          position="top-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
+      )}
       <div className="header p-0">
         <Logo component="#" />
         <Link className="hover" to="/login">
@@ -62,20 +90,31 @@ const FormLogin = (props) => {
           {type === "register" && (
             <input
               type="text"
+              maxLength="30"
               className="content__repass"
               value={nickName}
               onChange={handleNickName}
-              placeholder="User name"
+              placeholder="Tên đăng kí"
+              pattern={"^[a-zA-Z0-9]{4,10}$"}
             ></input>
           )}
           {type === "register" && (
-            <input
-              type="text"
+            <Textbox
               className="content__repass"
               value={phone}
-              onChange={handlePhone}
-              placeholder="Phone"
-            ></input>
+              onChange={(name) => setPhone(name)}
+              attributesInput={{
+                type: "text",
+                placeholder: "Điện thoại",
+                maxLength: "10",
+              }}
+              validationOption={{
+                type: "number",
+                reg: /[0-9]/,
+                required: true,
+                regMsg: "Phải là số  không có chữ và kí tự đặc biệt",
+              }}
+            />
           )}
           <input
             type="email"
@@ -89,32 +128,27 @@ const FormLogin = (props) => {
             type="password"
             maxLength="30"
             className="content__password"
-            placeholder="Password"
+            placeholder="Mật khẩu"
             value={password}
             onChange={handlePassWord}
           ></input>
-          {type === "register" && (
-            <input
-              type="password"
-              className="content__repass"
-              value={repass}
-              onChange={handleRePass}
-              placeholder="Password"
-            ></input>
-          )}
 
           <button className="btn btn-block">
             {type === "register" ? "Đăng kí" : "Đăng nhập"}
           </button>
         </form>
-        <div className="login">
-          <button className="btnfacebook">
-            <img src={facebook} alt="icon"></img> <p>Facebook</p>
-          </button>
-          <button>
-            <img src={google} alt="icon"></img> <p>Google</p>
-          </button>
-        </div>
+        {type === "login" && (
+          <div className="login">
+            <FacebookLogin
+              appId="278782940405979"
+              autoLoad={false}
+              fields="name,email,picture"
+              scope="public_profile, email"
+              callback={responseFacebook}
+              icon="fa-facebook"
+            />
+          </div>
+        )}
       </div>
     </div>
   );

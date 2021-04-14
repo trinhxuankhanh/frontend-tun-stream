@@ -19,6 +19,7 @@ import Header from "../../components/header";
 import edit from "../../asset/img/pencil.svg";
 import "./style.scss";
 import Thumbnail from "../../components/thumbnail";
+import ids from "shortid";
 
 const User = () => {
   const { id } = useParams();
@@ -32,6 +33,7 @@ const User = () => {
   const [titleStream, setTitleStream] = useState("");
   const [isStream, setIsStream] = useState(false);
   const [thumbnail, setThumbnail] = useState("");
+  const [streamKey, setStreamKey] = useState(ids.generate());
 
   const togglePC = () => setOpenPC(!dropdownOpenPC);
   const toggleMoblie = () => setOpenMoblie(!dropdownOpenMoblie);
@@ -40,10 +42,7 @@ const User = () => {
 
   const handleStopStream = () => {
     setIsStream(!isStream);
-    postStream.postStream(
-      { id_game: 0, title: "", status: false },
-      auth.stream_key
-    );
+    postStream.postStream({ id_game: 0, title: "", status: false }, id);
   };
 
   const handleSubmitStream = () => {
@@ -59,8 +58,9 @@ const User = () => {
           title: titleStream,
           status: true,
           thumbnail: thumbnail.base64,
+          stream_key: streamKey,
         },
-        auth.stream_key
+        id
       );
       setGameMoblie("Game Moblie");
     } else {
@@ -72,8 +72,9 @@ const User = () => {
           title: titleStream,
           status: true,
           thumbnail: thumbnail.base64,
+          stream_key: streamKey,
         },
-        auth.stream_key
+        id
       );
       setGamePC("Game PC");
     }
@@ -149,7 +150,7 @@ const User = () => {
                   <span>rtmp://127.0.0.1:1935/live</span>
                 </li>
                 <li>
-                  Stream key của bạn là: <span>{user.stream_key}</span>
+                  Stream key của bạn là: <span>{streamKey}</span>
                 </li>
                 <li>
                   Nói về buổi stream của bạn
