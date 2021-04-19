@@ -35,6 +35,7 @@ const FormLogin = (props) => {
       .then((res) => {
         setMess(response);
         loginFacebookApi.addUser(response.email).then((response) => {
+          localStorage.setItem("user", JSON.stringify(response.user));
           toast.dark(`🎉🎉🎉 ${response.mess}`, {
             position: "top-right",
             autoClose: 2000,

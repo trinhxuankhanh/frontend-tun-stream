@@ -10,6 +10,11 @@ const getLiveApi = {
     const url = `/live/${id}`;
     return axiosClient.get(url);
   },
+
+  getLiveByIdLive: (id) => {
+    const url = `/liveIdLive/${id}`;
+    return axiosClient.get(url);
+  },
 };
 
 export default getLiveApi;

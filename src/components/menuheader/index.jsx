@@ -1,7 +1,6 @@
 import React, { Fragment, useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Nav, NavItem } from "reactstrap";
-import diamond from "../../asset/img/diamond.svg";
 import { DataContext } from "../../GlobalState";
 import Btn from "../btn";
 import Btnclick from "../btnclick";
@@ -31,7 +30,6 @@ const MenuHeader = () => {
         <Search />
       </NavItem>
       <NavItem className="row">
-        <Btn content="Nạp" icon={diamond}></Btn>
         {!isAuth && (
           <Fragment>
             <Btn content="Đăng nhập" component="/login" />

@@ -26,7 +26,14 @@ const Comment = (props) => {
     contentRef.current.value += emoji.native;
   };
 
+  console.log(isAuth);
+
   const commentSubmit = () => {
+    if (isAuth === null) {
+      contentRef.current.value = "";
+      return alert("Vui lòng đăng nhập!!");
+    }
+
     const createdAt = new Date().toDateString();
     const content = contentRef.current.value;
     if (isAuth === null) setIsAuth(JSON.parse(localStorage.getItem("user")));
@@ -36,6 +43,12 @@ const Comment = (props) => {
       .then((response) => console.log(response))
       .catch((err) => console.log(err));
     contentRef.current.value = "";
+    getCommentsApi
+      .get(props.stream_key)
+      .then((response) => {
+        setComments(response);
+      })
+      .catch((err) => console.log(err));
   };
 
   useEffect(() => {
@@ -57,7 +70,6 @@ const Comment = (props) => {
                 key={comment._id}
                 username={comment.isAuth.username}
                 content={comment.content}
-                time={comment.createdAt}
               />
             );
           })}

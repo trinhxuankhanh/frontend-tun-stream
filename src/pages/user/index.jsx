@@ -6,20 +6,21 @@ import {
   DropdownMenu,
   DropdownToggle,
 } from "reactstrap";
+import ids from "shortid";
 import getGameApi from "../../api/getGameApi";
+import getLiveApi from "../../api/getLiveApi";
 import getUserApi from "../../api/getUserApi";
 import postNewStreamApi from "../../api/postNewStreamApi";
 import postStream from "../../api/postStreamApi";
+import edit from "../../asset/img/pencil.svg";
 import play from "../../asset/img/play.svg";
 import stop from "../../asset/img/stop.svg";
 import Btn from "../../components/btn";
 import Btnclick from "../../components/btnclick";
 import Footer from "../../components/footer";
 import Header from "../../components/header";
-import edit from "../../asset/img/pencil.svg";
-import "./style.scss";
 import Thumbnail from "../../components/thumbnail";
-import ids from "shortid";
+import "./style.scss";
 
 const User = () => {
   const { id } = useParams();
@@ -34,6 +35,7 @@ const User = () => {
   const [isStream, setIsStream] = useState(false);
   const [thumbnail, setThumbnail] = useState("");
   const [streamKey, setStreamKey] = useState(ids.generate());
+  const [live, setLive] = useState("");
 
   const togglePC = () => setOpenPC(!dropdownOpenPC);
   const toggleMoblie = () => setOpenMoblie(!dropdownOpenMoblie);
@@ -42,7 +44,22 @@ const User = () => {
 
   const handleStopStream = () => {
     setIsStream(!isStream);
-    postStream.postStream({ id_game: 0, title: "", status: false }, id);
+    getLiveApi
+      .getLiveByIdLive(live._id)
+      .then((response) => {
+        postStream.postStream(
+          {
+            id_game: 0,
+            title: "",
+            status: false,
+            thumbnail: "",
+            stream_key: null,
+            room: response.stream_key,
+          },
+          live._id
+        );
+      })
+      .catch((err) => console.log(err));
   };
 
   const handleSubmitStream = () => {
@@ -60,7 +77,7 @@ const User = () => {
           thumbnail: thumbnail.base64,
           stream_key: streamKey,
         },
-        id
+        live._id
       );
       setGameMoblie("Game Moblie");
     } else {
@@ -74,7 +91,7 @@ const User = () => {
           thumbnail: thumbnail.base64,
           stream_key: streamKey,
         },
-        id
+        live._id
       );
       setGamePC("Game PC");
     }
@@ -114,8 +131,11 @@ const User = () => {
 
   useEffect(() => {
     postNewStreamApi
-      .post({ auth }, auth.stream_key)
-      .then((response) => setIsStream(response.status))
+      .post({ auth, stream_key: streamKey }, auth._id)
+      .then((response) => {
+        setIsStream(response.status);
+        setLive(response.live);
+      })
       .catch((err) => console.log(err));
   }, []);
 
@@ -149,8 +169,12 @@ const User = () => {
                   Bạn có thể bắt đầu live ở đây{" "}
                   <span>rtmp://127.0.0.1:1935/live</span>
                 </li>
-                <li>
+                <li className="d-flex align-items-center">
                   Stream key của bạn là: <span>{streamKey}</span>
+                  <Btnclick
+                    content="Tạo key mới"
+                    click={() => setStreamKey(ids.generate())}
+                  />
                 </li>
                 <li>
                   Nói về buổi stream của bạn
